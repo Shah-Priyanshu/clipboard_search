@@ -49,5 +49,6 @@ def get_chatgpt_answer():
     
     return answer
 
-get_chatgpt_answer()
+print("Testing 123")
 
+get_chatgpt_answer()
