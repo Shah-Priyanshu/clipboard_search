@@ -22,33 +22,36 @@ pyautogui.typewrite(text_to_ask)
 # Press enter to submit the question
 pyautogui.press("enter")
 
-#Logic to detect the answer
+# Logic to detect the answer
 
 # wait for the chatgpt window to load
 time.sleep(5)
 print("Waited to print")
 
-#function to interact with chatgpt
+# function to interact with chatgpt
+
+
 def get_chatgpt_answer():
-    while arrow is not True:
+    arrow = None
+    while arrow is None:
         arrow = pyautogui.locateOnScreen('arrow_symbol.png')
     if arrow is None:
         raise ValueError('Answer not generated')
-    
+
     logo = None
     while logo is None:
-        logo = pyautogui.locateOnScreen('chatgpt_logo.png', region=(arrow.left, arrow.top, arrow.width, 500))
+        logo = pyautogui.locateOnScreen('chatgpt_logo.png', region=(
+            arrow.left, arrow.top, arrow.width, 500))
         if logo is None:
             pyautogui.scroll(-500)
             time.sleep(1)
-    
-    answer_region = (0, logo.top + 30, pyautogui.size().width, pyautogui.size().height - logo.top - 30)
-    answer_screenshot = pyautogui.screenshot(region=answer_region)
-    
-    answer = pytesseract.image_to_string(answer_screenshot)
-    
-    return answer
 
-print("Testing 123")
+    answer_region = (0, logo.top + 30, pyautogui.size().width,
+                     pyautogui.size().height - logo.top - 30)
+    answer_screenshot = pyautogui.screenshot(region=answer_region)
+
+    answer = pytesseract.image_to_string(answer_screenshot)
+
+    return answer
 
 get_chatgpt_answer()
